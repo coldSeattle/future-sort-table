@@ -1,0 +1,21 @@
+@import '../../styles/indxe.scss';
+
+.btn:hover {
+    cursor: pointer;
+    background-color: royalblue;
+}
+
+.btn {
+    border-radius: 5px;
+    outline: none;
+    width: 80px;
+    height: 40px;
+}
+.active {
+    background-color: royalblue;
+}
+
+.button--dis:disabled {
+    background-color:silver;
+    cursor:not-allowed;
+}

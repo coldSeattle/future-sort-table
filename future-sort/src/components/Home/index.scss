@@ -1,0 +1,14 @@
+@import "../../styles/indxe.scss";
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home__link-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50vw;
+}

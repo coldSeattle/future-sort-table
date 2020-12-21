@@ -1,0 +1,30 @@
+$title: orange;
+$link: rgb(59, 163, 223);
+$bgc: #FFF;
+$item: #FFF;
+
+.title {
+    color: $title;
+}
+
+.link {
+    text-decoration: none;
+    color:  $link;
+    font-size: 25px;
+}
+
+.link:hover {
+    color:rgb(21, 69, 97);
+}
+
+
+.btn {
+    min-width: fit-content;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #429cd6;
+    color: #fff;
+    padding: 10px;
+    margin: 4px;
+}
