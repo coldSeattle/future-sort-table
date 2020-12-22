@@ -70,7 +70,7 @@ class SmallDCom extends Component {
         this.setState({ loading: true })
 
         let val = this.state.value && this.state.value.toLowerCase()
-        // if (!this.state.value) return;
+        
         let filtered = this.state.data.filter(item => {
 
             if (!this.state.value || !item) {
@@ -96,17 +96,16 @@ class SmallDCom extends Component {
     }
 
     AddNewCell(newItem) {
-        console.log("new....",newItem);
         let res = this.state.data && this.state.data.slice()
-        console.log("res now---", res);
-        res.unshift(newItem) // unshift returns length of data array
-        console.log("result-------",res);
-        
+
+        if(res[0].id == newItem.id) return;
+
+        res.unshift(newItem) 
+
         this.setState((state, props) => ({
             data: res,
             filteredData: res
         }))
-        // this.formatData()
     }
 
     onChangeHandler(e) {

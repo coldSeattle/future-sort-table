@@ -31,6 +31,7 @@ const FormAddNewCell = ({setShowAddForm,showAddForm, newCellData, onChangeHandle
                         <input className="input" name="phone" value={newCellData.phone} onChange={event => onChangeHandler(event)} />
                     </div>
                     <button
+                    className="btn"
                         disabled={disabled}
                         onClick={() => handleAddNewCell(newCellData)}
                     >Save</button>

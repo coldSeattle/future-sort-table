@@ -146,17 +146,15 @@ class BigDCOM extends Component {
 
 
     AddNewCell(newItem) {
-        console.log("new....", newItem);
+
         let res = this.state.data && this.state.data.slice()
-        // let notUniversal = res.filter(item => item.id ==  newItem.id)
-        // if(notUniversal) return;
-        console.log("res now---", res);
+
+        if(res[0].id == newItem.id) return;
+        
         res.unshift(newItem) // unshift returns length of data array
-        console.log("result-------", res);
 
         this.setState((state, props) => ({
             data: res,
-            // filteredData: this.state.data3
         }), () => {
             this.formatData()
         })

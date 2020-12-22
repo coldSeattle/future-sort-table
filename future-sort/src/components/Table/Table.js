@@ -9,7 +9,6 @@ const Table = ({ onSortHandle, isLoading, data, handleAddNewCell }) => {
 
     const [moreInfo, setMoreInfo] = React.useState(null)
     const [showAddForm, setShowAddForm] = React.useState(false)
-    const [disabled, setDisabled] = React.useState(true)
     const [newCellData, setNewCellData] = React.useState({
         id: "",
         firstName: "",
