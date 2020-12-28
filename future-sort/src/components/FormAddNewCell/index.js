@@ -1,6 +1,8 @@
 import React from 'react'
 
-const FormAddNewCell = ({setShowAddForm,showAddForm, newCellData, onChangeHandler, handleAddNewCell, disabled}) => {
+import './index.scss'
+
+const FormAddNewCell = ({ setShowAddForm, showAddForm, newCellData, onChangeHandler, handleAddNewCell, disabled }) => {
 
     return (
         <div className="form_add_new_cell">
@@ -31,9 +33,12 @@ const FormAddNewCell = ({setShowAddForm,showAddForm, newCellData, onChangeHandle
                         <input className="input" name="phone" value={newCellData.phone} onChange={event => onChangeHandler(event)} />
                     </div>
                     <button
-                    className="btn"
+                        className={`btn ${disabled ? 'disabled' : ''}`}
                         disabled={disabled}
-                        onClick={() => handleAddNewCell(newCellData)}
+                        onClick={() => {
+                            if (disabled) return;
+                            handleAddNewCell(newCellData)
+                        }}
                     >Save</button>
                 </>
             }

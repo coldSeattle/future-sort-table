@@ -1,10 +1,9 @@
-import React, { Component, useCallback, useEffect } from 'react'
-import { getBigData, getSmallData, handleFiltered, handleSort, handleSortIcon, SMALL_DATA_API } from '../../helpers/helpers'
-import axios from 'axios'
-import './index.scss'
+import React, { Component } from 'react'
+import { getBigData } from '../../helpers/helpers'
 import { FilterForm } from '../FIlteration'
 import PaginationTable from '../Pagination/Pagination'
 import { Table } from '../Table/Table'
+import './index.scss'
 
 
 class BigDCOM extends Component {
@@ -193,4 +192,4 @@ class BigDCOM extends Component {
 }
 
 
-export { BigDCOM }
+export default BigDCOM 

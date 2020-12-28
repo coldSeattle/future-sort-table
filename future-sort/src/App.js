@@ -1,10 +1,8 @@
-import React from 'react'
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home } from './components/Home/Home';
-import { BigDCOM } from './components/main/BigDCOM';
-import { SmallDCom } from './components/main/SmallDCOM';
-
-
+import BigDCOM from './components/main/BigDCOM';
+import SmallDCom from './components/main/SmallDCOM';
 
 function App() {
   return (

@@ -132,4 +132,4 @@ class SmallDCom extends Component {
     }
 
 }
-export { SmallDCom }
+export default SmallDCom 
