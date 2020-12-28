@@ -1,21 +1,21 @@
 import axios from "axios";
 
 export const SMALL_DATA_API =
-  "http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}";
+  "https://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}";
 export const BIG_DATA_API =
   "&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}";
 
 // get small data packages
 export async function getSmallData() {
   const response = await axios.get(
-    "http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"
+    "https://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"
   );
   return response;
 }
 
 export async function getBigData() {
   const response = await axios.get(
-    `http://www.filltext.com/?rows=1000${BIG_DATA_API}`
+    `https://www.filltext.com/?rows=1000${BIG_DATA_API}`
   );
   return response;
 }
