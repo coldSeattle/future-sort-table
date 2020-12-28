@@ -1,14 +1,16 @@
-import React from 'react'
-import './index.scss'
+import React from "react";
+import "./index.scss";
 
-const DefButton = ({classNames, setCurrentPage, disableButton, content}) => {
-    return (
-        <button
-        className={`${classNames} ${disableButton ? 'button--dis' : ''}`}
-        onClick={() => setCurrentPage()}
-        disabled={disableButton}
-        >{content}</button>
-    )
-}
+const DefButton = ({ classNames, setCurrentPage, disableButton, content }) => {
+  return (
+    <button
+      className={`${classNames} ${disableButton ? "button--dis" : ""}`}
+      onClick={() => setCurrentPage()}
+      disabled={disableButton}
+    >
+      {content}
+    </button>
+  );
+};
 
-export { DefButton }
+export { DefButton };

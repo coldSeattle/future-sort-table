@@ -1,24 +1,26 @@
-@import '../../styles/indxe.scss';
+@import "../../styles/indxe.scss";
 
-.smallcom__table, .bigcom__table  {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    width: 100vw;
-    min-height: 100%;
+.smallcom__table,
+.bigcom__table {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100vw;
+  min-height: 100%;
 }
 
 .table__title > th {
-    min-width: 100px;
-    border: 1px solid black;
+  min-width: 100px;
+  border: 1px solid black;
 }
 
 .table__data > td {
-    min-width: 100px;
-    min-width: 100px;
+  min-width: 100px;
+  min-width: 100px;
 }
 
-.table__data:hover, .table__title:hover {
-    background-color: bisque;
-    cursor: pointer;
+.table__data:hover,
+.table__title:hover {
+  background-color: bisque;
+  cursor: pointer;
 }

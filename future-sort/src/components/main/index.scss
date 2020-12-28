@@ -1,26 +1,25 @@
-@import '../../styles/indxe.scss';
+@import "../../styles/indxe.scss";
 
 .smallcom__table {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    width: 100vw;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100vw;
 }
 
 .table__title > th {
-    min-width: 100px;
+  min-width: 100px;
 }
 
 .table__data > td {
-    min-width: 100px;
-    min-width: 100px;
+  min-width: 100px;
+  min-width: 100px;
 }
 
-
 .more_info {
-    display: flex;
-    flex-direction: column;
-    width: 50vw;
-    margin: 20px;
-    padding: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  margin: 20px;
+  padding: 5px;
 }
