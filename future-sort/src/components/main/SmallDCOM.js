@@ -28,27 +28,19 @@ class SmallDCom extends Component {
     this.AddNewCell = this.AddNewCell.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this._isMounted = true;
 
-    return new Promise((res, rej) => {
-      const response = getSmallData();
-      res(response);
-    }).then((response) => {
-      if (this._isMounted) {
-        this.setState(
-          (state, props) => ({
-            data: response.data,
-            filteredData: response.data,
-            isLoading: true,
-            totalDataLength: response.data.length,
-          }),
-          () => {
-            this.setState({ isLoading: false });
-          }
-        );
-      }
-    });
+    const response = await getSmallData();
+    if (this._isMounted) {
+      this.setState((state, props) => ({
+        data: response.data,
+        filteredData: response.data,
+        isLoading: true,
+        totalDataLength: response.data.length,
+        isLoading: false,
+      }));
+    }
   }
 
   componentWillUnmount() {
@@ -58,46 +50,30 @@ class SmallDCom extends Component {
   onSortHandle() {
     if (!this.state.ascending) {
       return this.setState((state, props) => ({
-        filteredData: state.filteredData.sort((a, b) => a.id - b.id),
+        filteredData: handleSort(state.filteredData).ascending,
         ascending: true,
       }));
     }
     if (this.state.ascending) {
       return this.setState((state, props) => ({
-        filteredData: state.filteredData.sort((a, b) => b.id - a.id),
+        filteredData: handleSort(state.filteredData).descending,
         ascending: false,
       }));
     }
   }
 
   onFilterHandler() {
-    this.setState({ loading: true });
+    this.setState({ isLoading: true });
 
     const val = this.state.value && this.state.value.toLowerCase();
 
-    const filtered = this.state.data.filter((item) => {
-      if (!this.state.value || !item) {
-        return true;
-      }
-      if (
-        String(item.id).includes(val) ||
-        item.firstName.toLowerCase().includes(val) ||
-        item.lastName.toLowerCase().includes(val) ||
-        item.email.toLowerCase().includes(val) ||
-        item.phone.toLowerCase().includes(val)
-      )
-        return true;
-
-      return false;
-    });
-    this.setState(
-      (state, props) => ({
-        filteredData: filtered,
-      }),
-      () => {
-        this.setState({ loading: true });
-      }
+    const filtered = this.state.data.filter((item) =>
+      handleFiltered(item, this.state.value)
     );
+    this.setState((state, props) => ({
+      filteredData: filtered,
+      isLoading: false,
+    }));
   }
 
   AddNewCell(newItem) {

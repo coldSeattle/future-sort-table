@@ -21,12 +21,6 @@ const Table = ({ onSortHandle, isLoading, data, handleAddNewCell }) => {
     newCellData.email.length &&
     newCellData.phone.length;
 
-  React.useEffect(() => {
-    console.log("moreInfo", moreInfo);
-    console.log("data", data);
-    console.log("newCellData", newCellData, Object.keys(newCellData).length);
-  }, [moreInfo, data, newCellData]);
-
   const handleMoreInfoByTableData = (id) => {
     const result = data.filter((item) => item.id == id);
     data && setMoreInfo(result);
@@ -78,7 +72,9 @@ const Table = ({ onSortHandle, isLoading, data, handleAddNewCell }) => {
               </React.Fragment>
             ))
           ) : (
-            <p>loading...</p>
+            <td style={{ display: "inline", textAlign: "center" }}>
+              loading...
+            </td>
           )}
         </tbody>
       </table>
@@ -87,8 +83,7 @@ const Table = ({ onSortHandle, isLoading, data, handleAddNewCell }) => {
           moreInfo.map((item) => (
             <React.Fragment key={item.id + item.firstName + item.lastName}>
               <p className="more_info__userName">
-                Выбран пользователь
-                {" "}
+                Выбран пользователь{" "}
                 <b>{`${item.firstName} ${item.lastName}`}</b>
               </p>
               <p>Описание:</p>
@@ -96,34 +91,22 @@ const Table = ({ onSortHandle, isLoading, data, handleAddNewCell }) => {
               {item.address &&
                 item.address.streetAddress && (
                   <p>
-                    Адрес проживания: 
-                    {" "}
-                    <b>{item.address.streetAddress}</b>
-                    {" "}
+                    Адрес проживания: <b>{item.address.streetAddress}</b>{" "}
                   </p>
                 ) &&
                 item.address.city && (
                   <p>
-                    Город: 
-                    {" "}
-                    <b>{item.address.city}</b>
-                    {" "}
+                    Город: <b>{item.address.city}</b>{" "}
                   </p>
                 ) &&
                 item.address.state && (
                   <p>
-                    Провинция/штат: 
-                    {" "}
-                    <b>{item.address.state}</b>
-                    {" "}
+                    Провинция/штат: <b>{item.address.state}</b>{" "}
                   </p>
                 ) &&
                 item.address.zip && (
                   <p>
-                    Индекс: 
-                    {" "}
-                    <b>{item.address.zip}</b>
-                    {" "}
+                    Индекс: <b>{item.address.zip}</b>{" "}
                   </p>
                 )}
             </React.Fragment>

@@ -26,8 +26,10 @@ export function handleSortIcon(ascending) {
 }
 
 export function handleSort(data) {
-  const asc = data && data.sort((a, b) => a.id - b.id); // For ascending sort
-  const desc = data && data.sort((a, b) => b.id - a.id); // For descending sort
+  const asc = data.slice().sort((a, b) => a.id - b.id); // For ascending sort
+  const desc = data.slice().sort((a, b) => b.id - a.id); // For descending sort
+  console.log("asc", asc);
+  console.log("desc", desc);
   return { ascending: asc, descending: desc };
 }
 

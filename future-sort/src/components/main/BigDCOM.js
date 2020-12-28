@@ -30,18 +30,16 @@ class BigDCOM extends Component {
   async componentDidMount() {
     this._isMounted = true;
 
-    const response_1 = await new Promise((res, rej) => {
-      const response = getBigData();
-      res(response);
-    });
+    const response = await getBigData();
+
     try {
       if (this._isMounted) {
         this.setState(
           () => ({
-            data: response_1.data,
-            filteredData: response_1.data,
+            data: response.data,
+            filteredData: response.data,
             isLoading: true,
-            totalDataLength: response_1.data.length,
+            totalDataLength: response.data.length,
           }),
           () => {
             this.formatData();
@@ -58,18 +56,18 @@ class BigDCOM extends Component {
     this._isMounted = false;
   }
 
-  handleClick(number) {
+  handleClick = (number) => {
     this.setState(
       () => ({
-        loading: true,
+        isLoading: true,
         currentPage: Number(number),
       }),
       () => {
         this.formatData();
-        this.setState({ loading: false });
+        this.setState({ isLoading: false });
       }
     );
-  }
+  };
 
   formatData() {
     const indexOfLastPost = this.state.currentPage * this.state.perPage;
@@ -81,17 +79,22 @@ class BigDCOM extends Component {
     );
 
     this.setState({ filteredData: currentPosts });
+
+    return {
+      indexOfFirstPage: indexOfFirstPage,
+      indexOfLastPost: indexOfLastPost,
+    };
   }
 
   onSortHandle() {
-    const indexOfLastPost = this.state.currentPage * this.state.perPage;
-    const indexOfFirstPage = indexOfLastPost - this.state.perPage;
-
     if (!this.state.ascending) {
       this.formatData();
       return this.setState((state, props) => ({
         filteredData: state.data
-          .slice(indexOfFirstPage, indexOfLastPost)
+          .slice(
+            this.formatData().indexOfFirstPage,
+            this.formatData().indexOfLastPost
+          )
           .sort((a, b) => a.id - b.id),
         ascending: true,
       }));
@@ -100,7 +103,10 @@ class BigDCOM extends Component {
       this.formatData();
       return this.setState((state, props) => ({
         filteredData: state.data
-          .slice(indexOfFirstPage, indexOfLastPost)
+          .slice(
+            this.formatData().indexOfFirstPage,
+            this.formatData().indexOfLastPost
+          )
           .sort((a, b) => b.id - a.id),
         ascending: false,
       }));
@@ -108,34 +114,38 @@ class BigDCOM extends Component {
   }
 
   onFilterHandler() {
-    this.setState({ loading: true });
+    this.setState({ isLoading: true });
 
     const val = this.state.value && this.state.value.toLowerCase();
-    if (!this.state.value) return;
-    const filtered = this.state.data.filter((item) => {
-      if (!this.state.value || !item) {
-        return true;
-      }
-      if (
-        String(item.id).includes(val) ||
-        item.firstName.toLowerCase().includes(val) ||
-        item.lastName.toLowerCase().includes(val) ||
-        item.email.toLowerCase().includes(val) ||
-        item.phone.toLowerCase().includes(val)
-      )
-        return true;
 
-      return false;
-    });
-    this.setState(
-      (state, props) => ({
-        filteredData: filtered,
-      }),
-      () => {
-        this.setState({ loading: true });
-        // this.formatData()
-      }
-    );
+    if (!this.state.value) return;
+
+    const filtered = this.state.data
+      .slice(
+        this.formatData().indexOfFirstPage,
+        this.formatData().indexOfLastPost
+      )
+      .filter((item) => {
+        if (!this.state.value || !item) {
+          return true;
+        }
+
+        if (
+          String(item.id).includes(val) ||
+          item.firstName.toLowerCase().includes(val) ||
+          item.lastName.toLowerCase().includes(val) ||
+          item.email.toLowerCase().includes(val) ||
+          item.phone.toLowerCase().includes(val)
+        )
+          return true;
+
+        return false;
+      });
+
+    this.setState(() => ({
+      filteredData: filtered,
+      isLoading: true,
+    }));
   }
 
   AddNewCell(newItem) {
@@ -143,10 +153,10 @@ class BigDCOM extends Component {
 
     if (res[0].id == newItem.id) return;
 
-    res.unshift(newItem); // unshift returns length of data array
+    res.unshift(newItem);
 
     this.setState(
-      (state, props) => ({
+      () => ({
         data: res,
       }),
       () => {
