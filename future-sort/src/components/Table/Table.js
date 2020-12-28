@@ -28,7 +28,7 @@ const Table = ({ onSortHandle, isLoading, data, handleAddNewCell }) => {
   }, [moreInfo, data, newCellData]);
 
   const handleMoreInfoByTableData = (id) => {
-    let result = data.filter((item) => item.id == id);
+    const result = data.filter((item) => item.id == id);
     data && setMoreInfo(result);
   };
 
@@ -87,30 +87,43 @@ const Table = ({ onSortHandle, isLoading, data, handleAddNewCell }) => {
           moreInfo.map((item) => (
             <React.Fragment key={item.id + item.firstName + item.lastName}>
               <p className="more_info__userName">
-                Выбран пользователь{" "}
-                <b>{item.firstName + " " + item.lastName}</b>
+                Выбран пользователь
+                {" "}
+                <b>{`${item.firstName} ${item.lastName}`}</b>
               </p>
               <p>Описание:</p>
               {item.description && <textarea defaultValue={item.description} />}
               {item.address &&
                 item.address.streetAddress && (
                   <p>
-                    Адрес проживания: <b>{item.address.streetAddress}</b>{" "}
+                    Адрес проживания: 
+                    {" "}
+                    <b>{item.address.streetAddress}</b>
+                    {" "}
                   </p>
                 ) &&
                 item.address.city && (
                   <p>
-                    Город: <b>{item.address.city}</b>{" "}
+                    Город: 
+                    {" "}
+                    <b>{item.address.city}</b>
+                    {" "}
                   </p>
                 ) &&
                 item.address.state && (
                   <p>
-                    Провинция/штат: <b>{item.address.state}</b>{" "}
+                    Провинция/штат: 
+                    {" "}
+                    <b>{item.address.state}</b>
+                    {" "}
                   </p>
                 ) &&
                 item.address.zip && (
                   <p>
-                    Индекс: <b>{item.address.zip}</b>{" "}
+                    Индекс: 
+                    {" "}
+                    <b>{item.address.zip}</b>
+                    {" "}
                   </p>
                 )}
             </React.Fragment>

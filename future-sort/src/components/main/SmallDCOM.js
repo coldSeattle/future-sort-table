@@ -1,4 +1,5 @@
 import React, { Component, useCallback, useEffect } from "react";
+import axios from "axios";
 import {
   getSmallData,
   handleFiltered,
@@ -6,7 +7,6 @@ import {
   handleSortIcon,
   SMALL_DATA_API,
 } from "../../helpers/helpers";
-import axios from "axios";
 import "./index.scss";
 import { FilterForm } from "../FIlteration";
 import { Table } from "../Table/Table";
@@ -32,7 +32,7 @@ class SmallDCom extends Component {
     this._isMounted = true;
 
     return new Promise((res, rej) => {
-      let response = getSmallData();
+      const response = getSmallData();
       res(response);
     }).then((response) => {
       if (this._isMounted) {
@@ -73,9 +73,9 @@ class SmallDCom extends Component {
   onFilterHandler() {
     this.setState({ loading: true });
 
-    let val = this.state.value && this.state.value.toLowerCase();
+    const val = this.state.value && this.state.value.toLowerCase();
 
-    let filtered = this.state.data.filter((item) => {
+    const filtered = this.state.data.filter((item) => {
       if (!this.state.value || !item) {
         return true;
       }
@@ -87,9 +87,8 @@ class SmallDCom extends Component {
         item.phone.toLowerCase().includes(val)
       )
         return true;
-      else {
-        return false;
-      }
+
+      return false;
     });
     this.setState(
       (state, props) => ({
@@ -102,7 +101,7 @@ class SmallDCom extends Component {
   }
 
   AddNewCell(newItem) {
-    let res = this.state.data && this.state.data.slice();
+    const res = this.state.data && this.state.data.slice();
 
     if (res[0].id == newItem.id) return;
 

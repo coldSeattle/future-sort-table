@@ -9,8 +9,8 @@ const PaginationTable = ({
   handleClick,
   current_page = 1,
 }) => {
-  let pageNumbers = [];
-  let perBtn = 10;
+  const pageNumbers = [];
+  const perBtn = 10;
 
   for (let i = 1; i <= Math.ceil(total_data / per_page); i++) {
     pageNumbers.push(i);
@@ -19,10 +19,10 @@ const PaginationTable = ({
   return (
     <div className="pagination">
       <DefButton
-        classNames={"btn"}
+        classNames="btn"
         disableButton={current_page <= 1}
         setCurrentPage={() => handleClick(Number(current_page - 1))}
-        content={"Prev"}
+        content="Prev"
       />
 
       {/* {pageNumbers.map(i => (
@@ -35,13 +35,13 @@ const PaginationTable = ({
       ))} */}
 
       <DefButton
-        classNames={"btn"}
+        classNames="btn"
         disableButton={current_page >= pageNumbers.length}
         setCurrentPage={() => handleClick(Number(current_page + 1))}
-        content={"Next"}
+        content="Next"
       />
       <div className="pagination__info">
-        <p>{current_page + "/" + pageNumbers.length}</p>
+        <p>{`${current_page}/${pageNumbers.length}`}</p>
       </div>
     </div>
   );

@@ -18,11 +18,6 @@ class BigDCOM extends Component {
       perPage: 50,
       isLoading: false,
       newCell: {},
-      // id: "",
-      // firstName: "",
-      // lastName: "",
-      // phone: "",
-      // email: ""
     };
 
     this._isMounted = false;
@@ -32,20 +27,21 @@ class BigDCOM extends Component {
     this.AddNewCell = this.AddNewCell.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this._isMounted = true;
 
-    return new Promise((res, rej) => {
-      let response = getBigData();
+    const response_1 = await new Promise((res, rej) => {
+      const response = getBigData();
       res(response);
-    }).then((response) => {
+    });
+    try {
       if (this._isMounted) {
         this.setState(
-          (state, props) => ({
-            data: response.data,
-            filteredData: response.data,
+          () => ({
+            data: response_1.data,
+            filteredData: response_1.data,
             isLoading: true,
-            totalDataLength: response.data.length,
+            totalDataLength: response_1.data.length,
           }),
           () => {
             this.formatData();
@@ -53,17 +49,19 @@ class BigDCOM extends Component {
           }
         );
       }
-    });
+    } catch (error) {
+      alert("someting went wrong, please refresh page! ERROR: ", error);
+    }
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-  handleClick = (number) => {
-    this.setState({ loading: true });
+  handleClick(number) {
     this.setState(
-      (state, props) => ({
+      () => ({
+        loading: true,
         currentPage: Number(number),
       }),
       () => {
@@ -71,7 +69,7 @@ class BigDCOM extends Component {
         this.setState({ loading: false });
       }
     );
-  };
+  }
 
   formatData() {
     const indexOfLastPost = this.state.currentPage * this.state.perPage;
@@ -112,9 +110,9 @@ class BigDCOM extends Component {
   onFilterHandler() {
     this.setState({ loading: true });
 
-    let val = this.state.value && this.state.value.toLowerCase();
+    const val = this.state.value && this.state.value.toLowerCase();
     if (!this.state.value) return;
-    let filtered = this.state.data.filter((item) => {
+    const filtered = this.state.data.filter((item) => {
       if (!this.state.value || !item) {
         return true;
       }
@@ -126,9 +124,8 @@ class BigDCOM extends Component {
         item.phone.toLowerCase().includes(val)
       )
         return true;
-      else {
-        return false;
-      }
+
+      return false;
     });
     this.setState(
       (state, props) => ({
@@ -142,7 +139,7 @@ class BigDCOM extends Component {
   }
 
   AddNewCell(newItem) {
-    let res = this.state.data && this.state.data.slice();
+    const res = this.state.data && this.state.data.slice();
 
     if (res[0].id == newItem.id) return;
 

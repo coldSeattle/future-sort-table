@@ -15,7 +15,7 @@ export async function getSmallData() {
 
 export async function getBigData() {
   const response = await axios.get(
-    `http://www.filltext.com/?rows=1000` + BIG_DATA_API
+    `http://www.filltext.com/?rows=1000${BIG_DATA_API}`
   );
   return response;
 }
@@ -26,13 +26,13 @@ export function handleSortIcon(ascending) {
 }
 
 export function handleSort(data) {
-  let asc = data && data.sort((a, b) => a.id - b.id); // For ascending sort
-  let desc = data && data.sort((a, b) => b.id - a.id); // For descending sort
+  const asc = data && data.sort((a, b) => a.id - b.id); // For ascending sort
+  const desc = data && data.sort((a, b) => b.id - a.id); // For descending sort
   return { ascending: asc, descending: desc };
 }
 
 export function handleFiltered(item, value = "") {
-  let val = value && value.toLowerCase();
+  const val = value && value.toLowerCase();
   if (!value || !item) return true;
   if (
     String(item.id).includes(val) ||
@@ -42,7 +42,6 @@ export function handleFiltered(item, value = "") {
     item.phone.toLowerCase().includes(val)
   )
     return true;
-  else {
-    return false;
-  }
+
+  return false;
 }
